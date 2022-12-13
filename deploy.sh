@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "Swithing to branch master"
-git checkout master # код проверят последнии обновления проекта
+git checkout master
 
 echo "Building app..."
 npm run build
