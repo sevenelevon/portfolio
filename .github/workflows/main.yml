@@ -19,7 +19,6 @@ jobs:
 
     steps:
       - name: Install SSH Key
-#         uses: shimataro/ssh-key-actions@v2.3.1
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
@@ -33,5 +32,5 @@ jobs:
         
         #deplo
       - run: rsync --archive --compress --progress . ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.SERVER_PATH }}
-#       - run: npm ci
-#       - run: npm run build
+
+      - run: npm run build
