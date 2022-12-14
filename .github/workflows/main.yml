@@ -23,7 +23,7 @@ jobs:
       with:
         key: ${{ secrets.DEPLOY_SERVER_KEY }}
         name: id_rsa # optional
-        known_hosts: ${{ secrets.KNOWN_HOSTS }}
+        known_hosts: ${{ secrets.SERVER_HOST }}
         if_key_exists: fail # replace / ignore / fail; optional (defaults to fail)
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
@@ -31,7 +31,7 @@ jobs:
 
           
     - name: Generate auth hosts
-      run: ssh-keyscan -H ${{ env.SERVER_HOST }} >> /home/seven/.ssh/known_hosts
+      run: ssh-keyscan -H ${{ env.SERVER_HOST }} >> ~/.ssh/known_hosts
         
         #deplo
     - run: rsync --archive --compress --progress . ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.SERVER_PATH }}
