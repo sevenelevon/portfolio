@@ -18,18 +18,22 @@ jobs:
         node-version: [16.x]
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          key: ${{ secrets.DEPLOY_SERVER_KEY }}
-          known_hosts: "just-a-placeholder-so-we-dont-errors"
-          node-version: ${{ matrix.node-version }}
+    - name: Install SSH key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.DEPLOY_SERVER_KEY }}
+        name: id_rsa # optional
+        known_hosts: ${{ secrets.KNOWN_HOSTS }}
+        if_key_exists: fail # replace / ignore / fail; optional (defaults to fail)
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+
           
-      - name: Generate auth hosts
-        run: ssh-keyscan -H ${{ env.SERVER_HOST }} >> /home/seven/.ssh/known_hosts
+    - name: Generate auth hosts
+      run: ssh-keyscan -H ${{ env.SERVER_HOST }} >> /home/seven/.ssh/known_hosts
         
         #deplo
-      - run: rsync --archive --compress --progress . ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.SERVER_PATH }}
-      - run: npm ci
-      - run: npm run build
+    - run: rsync --archive --compress --progress . ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.SERVER_PATH }}
+    - run: npm ci
+    - run: npm run build
