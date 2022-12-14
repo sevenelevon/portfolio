@@ -5,10 +5,12 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-
+env:
+  SERVER_HOST: 192.168.0.2
+  SERVER_USER: seven
+  SERVER_PATH: /home/seven/
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -16,10 +18,20 @@ jobs:
         node-version: [16.x]
 
     steps:
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-actions@v2.3.1
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
+          key: ${{ secrets.DEPLOY_SERVER_KEY }}
+          known_hosts: "just-a-placeholder-so-we-dont-errors"
           node-version: ${{ matrix.node-version }}
-      - run: npm ci
-      - run: npm run build
+          
+      - name: Generate auth hosts
+        run: ssh-keyscan -H ${{ env.SERVER_HOST }} >> ~/.ssh/known_hosts
+        
+        #deplo
+      - run: rsync --archive --compress --progress . ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:${{ env.SERVER_PATH }}
+#       - run: npm ci
+#       - run: npm run build
