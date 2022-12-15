@@ -31,48 +31,22 @@ jobs:
     - name: copy the files
       uses: appleboy/scp-action@master
       with:
-        host: 192.168.0.2
-        username: usernginx
-        password: seven
-        source: "."
-        target: "/var/www/192.168.0.2"
+        run: seven@192.168.2
+        run: seven
+#         host: 192.168.0.2
+#         username: usernginx
+#         password: seven
+#         source: "."
+#         target: "/var/www/192.168.0.2"
 
-    # clean build of frontend
-    - name: build clean frontend
-      uses: appleboy/ssh-action@master
-      with:
-        host: 192.168.0.2
-        username: seven
-        password: seven
-        script: |
-          cd /var/www/192.168.0.2
-          npm
-          npm run build
-
-#     # clean build of backend
-#     - name: build clean backend
+#     # clean build of frontend
+#     - name: build clean frontend
 #       uses: appleboy/ssh-action@master
 #       with:
-#         host: ${{ secrets.HOST_PRODUCTION }}
-#         username: ${{ secrets.USERNAME_STAGING }}
-#         port: ${{ secrets.PORT_STAGING }}
-#         key: ${{ secrets.SSH_KEY_STAGING }}
+#         host: 192.168.0.2
+#         username: seven
+#         password: seven
 #         script: |
-#           cd /var/www/__APP__/server
-#           yarn
-#           yarn build
-#           pm2 restart all
-
-#     # we don't even build our API server, but simple tell pm2 to run it.
-#     # we communicate with our staging hosting server via SSH using an action previously made.
-#     - name: restart pm2 for backend
-#       uses: appleboy/ssh-action@master
-#       with:
-#         host: ${{ secrets.HOST_STAGING }}
-#         username: ${{ secrets.USERNAME_STAGING }}
-#         port: ${{ secrets.PORT_STAGING }}
-#         key: ${{ secrets.SSH_KEY_STAGING }}
-#         script: |
-#           pm2 stop all
-#           pm2 delete all
-#           pm2 start /var/www/__APP__/server/index.js --name tourbillon-staging
+#           cd /var/www/192.168.0.2
+#           npm
+#           npm run build
