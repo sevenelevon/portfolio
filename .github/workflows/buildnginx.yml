@@ -6,8 +6,7 @@ name: deploy staging
 # we are interested only in pushes onto a 'dev' branch
 on:
   push:
-    branches:
-      - dev
+    branches: [ master ]
 
 # jobs to be done.
 # each job has multiple steps.
