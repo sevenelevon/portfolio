@@ -33,7 +33,7 @@ jobs:
       with:
         host: 192.168.0.2
         username: seven
-        port: 21
+        port: 22
         key: ${{ secrets.DEPLOY_SERVER_KEY }}
         source: "."
         target: "/var/www/192.168.0.2"
@@ -44,7 +44,7 @@ jobs:
       with:
         host: 192.168.0.2
         username: seven
-        port: 21
+        port: 22
         key: ${{ secrets.DEPLOY_SERVER_KEY }}
         script: |
           cd /var/www/192.168.0.2
