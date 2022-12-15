@@ -42,39 +42,39 @@ jobs:
     - name: build clean frontend
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.HOST_PRODUCTION }}
-        username: ${{ secrets.USERNAME_STAGING }}
-        port: ${{ secrets.PORT_STAGING }}
-        key: ${{ secrets.SSH_KEY_STAGING }}
+        host: 192.168.0.2
+        username: seven
+        port: 443
+        key: ${{ secrets.DEPLOY_SERVER_KEY }}
         script: |
-          cd /var/www/__APP__/client
-          yarn
-          yarn build
+          cd /var/www/192.168.0.2
+          npm
+          npm run build
 
-    # clean build of backend
-    - name: build clean backend
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST_PRODUCTION }}
-        username: ${{ secrets.USERNAME_STAGING }}
-        port: ${{ secrets.PORT_STAGING }}
-        key: ${{ secrets.SSH_KEY_STAGING }}
-        script: |
-          cd /var/www/__APP__/server
-          yarn
-          yarn build
-          pm2 restart all
+#     # clean build of backend
+#     - name: build clean backend
+#       uses: appleboy/ssh-action@master
+#       with:
+#         host: ${{ secrets.HOST_PRODUCTION }}
+#         username: ${{ secrets.USERNAME_STAGING }}
+#         port: ${{ secrets.PORT_STAGING }}
+#         key: ${{ secrets.SSH_KEY_STAGING }}
+#         script: |
+#           cd /var/www/__APP__/server
+#           yarn
+#           yarn build
+#           pm2 restart all
 
-    # we don't even build our API server, but simple tell pm2 to run it.
-    # we communicate with our staging hosting server via SSH using an action previously made.
-    - name: restart pm2 for backend
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST_STAGING }}
-        username: ${{ secrets.USERNAME_STAGING }}
-        port: ${{ secrets.PORT_STAGING }}
-        key: ${{ secrets.SSH_KEY_STAGING }}
-        script: |
-          pm2 stop all
-          pm2 delete all
-          pm2 start /var/www/__APP__/server/index.js --name tourbillon-staging
+#     # we don't even build our API server, but simple tell pm2 to run it.
+#     # we communicate with our staging hosting server via SSH using an action previously made.
+#     - name: restart pm2 for backend
+#       uses: appleboy/ssh-action@master
+#       with:
+#         host: ${{ secrets.HOST_STAGING }}
+#         username: ${{ secrets.USERNAME_STAGING }}
+#         port: ${{ secrets.PORT_STAGING }}
+#         key: ${{ secrets.SSH_KEY_STAGING }}
+#         script: |
+#           pm2 stop all
+#           pm2 delete all
+#           pm2 start /var/www/__APP__/server/index.js --name tourbillon-staging
