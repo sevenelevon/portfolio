@@ -18,7 +18,7 @@ jobs:
     # name of the job (you will see this in Actions view on Github)
     name: build and deploy of staging
     # part of specification what kind of remote machine should Action use to execute the jobs on
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     # steps are what you see in logs in Actions
     steps:
     # we use an action that somebody previously made that allows to get the latest version of the code from the specific branch
@@ -31,12 +31,12 @@ jobs:
     - name: copy the files
       uses: appleboy/scp-action@master
       with:
-        host:  ${{ secrets.HOST_STAGING }}
-        username: ${{ secrets.USERNAME_STAGING }}
-        port: ${{ secrets.PORT_STAGING }}
-        key: ${{ secrets.SSH_KEY_STAGING }}
+        host: 192.168.0.2
+        username: seven
+        port: 443
+        key: ${{ secrets.DEPLOY_SERVER_KEY }}
         source: "."
-        target: "/var/www/__APP__"
+        target: "/var/www/192.168.0.2"
 
     # clean build of frontend
     - name: build clean frontend
