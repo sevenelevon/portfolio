@@ -33,7 +33,7 @@ jobs:
       with:
         host: 192.168.0.2
         username: usernginx
-        key: ${{ secrets.DEPLOY_SERVER_KEY }}
+        password: seven
         source: "."
         target: "/var/www/192.168.0.2"
 
@@ -42,8 +42,8 @@ jobs:
       uses: appleboy/ssh-action@master
       with:
         host: 192.168.0.2
-        username: usernginx
-        key: ${{ secrets.DEPLOY_SERVER_KEY }}
+        username: seven
+        password: seven
         script: |
           cd /var/www/192.168.0.2
           npm
