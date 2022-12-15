@@ -25,7 +25,7 @@ jobs:
     - name: checkout 'dev'
       uses: actions/checkout@master
       with:
-        ref: dev
+        ref: build
 
     # we also use previously made action that enables us to copy fies from a remote machine that Action is using currently, to another machine, via SSH
     - name: copy the files
