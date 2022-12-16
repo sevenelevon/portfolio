@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -26,6 +27,29 @@
 
 .App-link {
   color: #61dafb;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: "0 30px";
+  background-color: #232F3E;
+  color: #FFFFFF;
+  padding: 0 30px;
+}
+.logo {
+  width: 130px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+.header-a {
+  margin-left: 30px;
+  color: #FFFFFF;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 @keyframes App-logo-spin {
