@@ -21,7 +21,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       #Setup key
       - run: set -eu
-      - run: echo "${{ SECRET_KEY }}" > "$HOME/.ssh/key"
+      - run: echo "${{ secrets.SECRET_KEY }}" > "$HOME/.ssh/key"
       - run: chmod 600 "$HOME/.ssh/key"
       #Build
       - run: npm ci
