@@ -6,6 +6,6 @@ echo "Building app..."
 npm run build
 
 echo "Deploying files to server..."
-scp -r build/* usernginx@192.168.0.2:/var/www/192.168.0.2/
+scp -r build/* seven@192.168.0.2:/var/www/192.168.0.2/
 
 echo "Done!"
