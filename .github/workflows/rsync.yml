@@ -23,5 +23,5 @@ jobs:
       - run: npm run build --if-present
       #Setup key
       - run: set -eu
-      - run: echo "${{ SECRET_KEY }}" > "$HOME/.ssh/key"
+      - run: echo "${{ secrets.key }}" > "$HOME/.ssh/key"
       - run: cd /home/seven/actions-runner/react/portfolio/portfolio/build && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . seven@192.168.0.2:/var/www/192.168.0.2/
