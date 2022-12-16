@@ -22,7 +22,7 @@ jobs:
       #Setup key
       - run: set -eu
       - run: echo "${{ secrets.key }}" > "$HOME/.ssh/key"
-      - run: chmod 600 "$HOME/.ssh/key"
+      - run: chmod 607 "$HOME/.ssh/key"
       #Build
       - run: npm ci
       - run: npm run build --if-present
