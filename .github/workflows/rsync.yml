@@ -24,7 +24,7 @@ jobs:
       - run: echo "${{ secrets.SECRET_KEY }}" > "$HOME/.ssh/key"
       - run: chmod 606 "$HOME/.ssh/key"
       #Build
-      - run: npm ci
+      - run: npm i
       - run: npm run build --if-present
       #Deploy
 #      - run: cd /home/seven/actions-runner/react/portfolio/portfolio/build && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . seven@192.168.0.2:/var/www/192.168.0.2/
