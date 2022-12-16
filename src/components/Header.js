@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "../logo.svg";
 
 function Header() {
   return (
@@ -8,6 +7,7 @@ function Header() {
     <div className="image_site">
         <img src="https://static.promopult.ru/uploads/library/img/home-page_img_2.png"></img>
     </div>
+    <h1>Введение test</h1>
     </>
   );
 }
